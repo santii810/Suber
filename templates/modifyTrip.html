@@ -1,0 +1,46 @@
+{% extends "core.html" %}
+{% block content %}
+<h1 class="text-primary text-center">Modificar viaje</h1>
+<form id="newTrip" action="/confirmModifyTrip?id={{trip.key.urlsafe()}}" method="post">
+    <div class="form-group">
+        <label for="origen">Origen</label>
+        <input type="text" class="form-control" name="origen" id="origen" value="{{trip.origen}}"
+               placeholder="Introduce el origen">
+    </div>
+    <div class="form-group">
+        <label for="destino">Destino</label>
+        <input type="text" class="form-control" name="destino" id="destino" value="{{trip.destino}}"
+               placeholder="Introduce el destino">
+    </div>
+    <div class="form-group">
+        <label for="horaSalida">Hora de salida:</label>
+        <input type="time" class="form-control" name="horaSalida" id="horaSalida" aria-describedby="horaSalidaHelp"
+               value="{{trip.horaSalida}}" placeholder=" Introduce la hora de salida">
+        <small id="horaSalidaHelp" class="form-text text-muted">Introduce una hora realista, a la que puedas iniciar el
+            viaje sin prisa
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="duracion">Duracion:</label>
+        <input type="number" class="form-control" min="5" name="duracion" id="duracion" value="{{trip.duracion}}"
+               placeholder=" Introduce la duracion aproximada en minutos">
+    </div>
+    <div class="form-group">
+        <label for="plazas">Número de plazas:</label>
+        <input type="number" class="form-control" min="1" max="5" name="plazas" id="plazas" value="{{trip.plazas}}"
+               placeholder=" Introduce el número de plazas">
+    </div>
+    <div class="form-group">
+        <label for="modelo">Modelo</label>
+        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Introduce el modelo del coche"
+               value="{{trip.modelo}}">
+    </div>
+    <div class=" form-group">
+        <label for="color">Color</label>
+        <input type="text" class="form-control" id="color" name="color" placeholder="Introduce el color del coche"
+               value="{{trip.color}}">
+    </div>
+
+    <button type=" submit" class="btn btn-primary">Modificar viaje</button>
+</form>
+{% endblock %}

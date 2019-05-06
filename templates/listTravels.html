@@ -1,0 +1,58 @@
+{% extends "core.html" %}
+{% block content %}
+<div>
+    <h1 class="text-primary text-center">Listado de viajes</h1>
+</div>
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th class="text-center" scope="col">Origen</th>
+        <th class="text-center" scope="col">Destino</th>
+        <th class="text-center" scope="col">Hora de salida</th>
+        <th class="text-center" scope="col">Duración</th>
+        <th class="text-center" scope="col">Nº de plazas</th>
+        <th class="text-center" scope="col">Modelo de coche</th>
+        <th class="text-center" scope="col">Conductor</th>
+        <th class="text-center" scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for viaje in viajes %}
+    <tr>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.origen) }}</td>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.destino) }}</td>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.horaSalida) }}</td>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.duracion) }} min.</td>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.plazas) }}</td>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.modelo) }} {{ "%s"|format(viaje.color) }}</td>
+        <td class="text-center align-middle"> {{ "%s"|format(viaje.propietario) }}</td>
+        <td class="text-center align-middle">
+            <div class="btn-group">
+
+                {%if viaje.propietario == user.nickname() %}
+
+                <div class="col-sm-6">
+                    <a class="btn btn-outline-secondary btn-sm" href="/modifyTrip?id={{viaje.key.urlsafe()}}">
+                        Modificar</a>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <a class="btn btn-outline-danger btn-sm" href="/deleteTrip?id={{viaje.key.urlsafe()}}"
+                       onclick="confirmAction()"> Borrar</a>
+                </div>
+
+                {% else %}
+
+                <div class="col-sm-12">
+                    <a class="btn btn-outline-success btn-sm" href="/join?id={{viaje.key.urlsafe()}}">Unirse</a>
+                </div>
+
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
